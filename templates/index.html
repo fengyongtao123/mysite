@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block til %}
+ <title>index</title>
+{% endblock %}
+{% block con %}
+    <form action="{% url 'index1' %}" method="post">
+        姓名 <input type="text" name="name">
+        年龄 <input type="text" name="age">
+        <input type="submit">
+    </form>
+
+    <hr>
+    <h5>自定义过滤器</h5>
+    {% load my_tag_fliter %}
+    <p>{{ i|multi_filter }}</p>
+
+{% endblock %}

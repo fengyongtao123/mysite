@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="/static/jquery-3.6.1.min.js"></script>
+</head>
+<body>
+<h1>Welcome ajx</h1>
+<button class="ajx">ajx</button>
+<hr/>
+
+    <input type="text" id="a"/>+<input type="text" id="b"/>=<input type="text" id="c"/>
+    <button class="btn">按钮</button>
+
+<hr/>
+
+用户名:<input type="text" id="user"/>
+密码:<input type="password" id="pwd"/>
+<button class="login">登录</button><span class="error" style="color: red;margin-left: 10px"></span>
+
+<script>
+    $('.ajx').click(function(){
+       //发送ajx请求
+        $.ajax({
+            url:"/app01/test_ajx/",//请求路径
+            type:"get",//请求方式
+            data:{
+                a:1,
+                b:2
+            },
+            success:function(data) {
+               alert(data)
+            }
+        })
+    });
+
+    $('.btn').click(function(){
+        $.ajax({
+            url:"/app01/cal/",
+            type:"post",
+            data:{
+                "a":$("#a").val(),
+                "b":$("#b").val()
+            },
+            success:function(data){
+                 console.log(data);
+                 $("#c").val(data);
+            }
+        })
+    });
+    $('.login').click(function(){
+        $.ajax({
+           url:"/app01/login/",
+           type:"post",
+           data:{
+                "user":$('#user').val(),
+                "pwd":$('#pwd').val()
+           },
+           success:function(data){
+                var ret=JSON.parse(data);
+                console.log(ret);
+                if(ret.user){
+                    location.href='https://www.baidu.com';
+                }else{
+                    $('.error').html(ret.message);
+                }
+
+           }
+           }
+
+        )
+    });
+</script>
+</body>
+</html>

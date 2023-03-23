@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/book/bootstrap-3.4.1-dist/css/bootstrap.css"/>
+    <title>add_book</title>
+    <style>
+        .container{
+            margin-top: 60px;
+        }
+        .bth{
+            margin-top: 10px;
+            background-color: darkgreen;
+            color: #ffffff;
+            width: 60px;
+            height: 40px;
+        }
+        .h{
+            margin-left: 45%;
+            margin-top: 40px;
+
+
+        }
+    </style>
+</head>
+<body>
+<div class="h">
+    <h1>编辑书籍</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post">
+                {%  csrf_token %}
+                <div>
+                    <label for="">书籍名称</label>
+                    <input type="text" class="form-control" name="title" value="{{ book_ojb.title }}"/>
+                </div>
+                 <div>
+                    <label for="">价格</label>
+                    <input type="text" class="form-control" name="price" value="{{ book_ojb.price }}"/>
+                </div>
+                 <div>
+                    <label for="">出版社</label>
+                    <input type="text" class="form-control" name="publish" value="{{ book_ojb.publish }}"/>
+                </div>
+                 <div>
+                    <label for="">出版日期</label>
+                    <input type="date" class="form-control" name="data" value="{{ book_ojb.pub_data|date:'Y-m-d' }}"/>
+                </div>
+                <input type="submit" class="bth bth-success pull-right "  >
+            </form>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

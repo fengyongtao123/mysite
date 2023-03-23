@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/book/bootstrap-3.4.1-dist/css/bootstrap.css"/>
+    <title>add_book</title>
+    <style>
+        .container {
+            margin-top: 60px;
+        }
+
+        .bth {
+            margin-top: 10px;
+            background-color: darkgreen;
+            color: #ffffff;
+            width: 60px;
+            height: 40px;
+        }
+
+        .h {
+            margin-left: 45%;
+            margin-top: 40px;
+
+        }
+    </style>
+</head>
+<body>
+<div class="h">
+    <h1>查看书籍</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-3">
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading" style="padding: 5px 10px">
+                    <a href="/book/duo_add/" style="font-size: 18px  left:2px" class="btn btn-success">添加书籍</a>
+                </div>
+
+                <!-- Table -->
+                <table class="table table-striped table-bordered">
+                    <thead>
+                       <tr>
+                           <th>书籍编号</th>
+                           <th>书籍名称</th>
+                           <th>价格</th>
+                           <th>出版日期</th>
+                           <th>出版社</th>
+                           <th>作者</th>
+                       </tr>
+                    </thead>
+                    <tbody>
+                      {% for book2 in book_list %}
+                      <tr>
+                         <td>{{  forloop.counter }}</td>
+                         <td>{{ book2.title }}</td>
+                          <td>{{ book2.price }}</td>
+                          <td>{{  book2.publishDate|date:'Y-m-d'}}</td>
+                          <td>{{ book2.publish.name }}</td>
+                          <td>
+                              {%  for author in book2.authors.all %}
+                                  {% if forloop.last %}
+                                   <span>{{ author.name }}</span>
+                                  {% else %}
+                                  <span>{{ author.name }}</span>,
+                                  {% endif %}
+                               {% endfor %}
+                          </td>
+                         <td>
+                             <a href="/book/book_up/{{ book2.pk }}/change/" class="btn btn-warning">编辑</a>
+                             <a href="/book/book_de/{{ book2.pk }}/shanchu/" class="btn btn-danger">删除</a>
+                         </td>
+
+
+
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
